@@ -36,6 +36,7 @@ elif shape == "Rectangular":
 
 c = st.sidebar.number_input("Enter cohesion (kPa):", min_value=0, step=10)
 γ_s = st.sidebar.number_input("Unit weight of soil γ_s (kN/m³)", value=18.0, step=1.0, format="%.2f")
+γ_sat = st.sidebar.number_input("Unit weight of saturated soil γ_sat (kN/m³)", value=18.0, step=1.0, format="%.2f")
 d_f = st.sidebar.number_input("Foundation depth d_f (m)", min_value=0.0, value=0.00, step=0.1, format="%.3f")
 d_wt = st.sidebar.number_input("Depth of Water Table (m)", min_value=0.0, value=0.00, step=0.1, format="%.3f")
 FS= st.sidebar.number_input("Factor of Safety", value=2.0, step=0.5, format="%.1f")
@@ -88,10 +89,27 @@ st.write(f"Sc = {Sc}")
 st.write(f"Sq = {Sq}")
 st.write(f"Sγ = {Sγ}")
 st.write(f"")
-q= γ_s * d_f
+
+if d_wt < d_f+B:
+  st.write(f"*Considering the effect of the water table:*")
+  if d_wt < d_f:  
+    st.write(f"*Since the water table is above the footing:*")
+    γ = γ_sat -γ_s
+    q = γ_s* d_wt+ γ* (d_f-d_wt)
+  elif d_wt == d_f:
+    γ = γ_sat -γ_s
+    q = γ_s* d_wt
+  elif d_wt > d_f and d_wt < d_f+B:
+    q = γ_s* d_wt
+    H = 0.5*B*math.tan(math.radians(45+idx/2))
+    γ = γ_s/ (H**2)*(2*H-(d_wt-d_f))+(γ_sat -γ_s)/(H**2)*(H-(d_wt-d_f))**2
+else:
+  q= γ_s * d_f
+  γ = γ_s
 st.write(f"q = {q:.2f} kPa")
+st.write(f"γ = {γ:.2f} kN/m3")
 st.write(f"Using the **Terzaghi Bearing Capacity Equation:**")
-qu = c*Nc*Sc + q*Nq*Sq + 0.5*B*γ_s*Nγ*Sγ
+qu = c*Nc*Sc + q*Nq*Sq + 0.5*B*γ*Nγ*Sγ
 qa = qu/FS
 st.write(f"The ultimate bearing capacity is **qu = {qu:.2f} kPa.**")
 st.write(f"The safe bearing capacity is **qa = {qa:.2f} kPa.**")
