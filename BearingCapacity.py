@@ -14,20 +14,20 @@ st.sidebar.header("Input parameters (SI units)")
 
 idx = st.sidebar.number_input("Enter the angle of internal friction (0–50):", min_value=0, max_value=50, step=1)
 shape = st.sidebar.selectbox("Select the footing with a given dimension:", options=["Strip", "Circular", "Square", "Rectangular"])
-if shape = "Strip":
+if shape == "Strip":
   B= st.sidebar.number_input("Enter the footing width (m.):", min_value=0.5, step=0.5)
   Sc = Sq = Sγ = 1.0
-elif shape = "Square":
+elif shape == "Square":
   B= st.sidebar.number_input("Enter the footing width (m.):", min_value=0.5, step=0.5)
   Sc = 1.3 
   Sq= 1.0
   Sγ = 0.8
-elif shape = "Circular":
+elif shape == "Circular":
   B= st.sidebar.number_input("Enter the footing diameter (m.):", min_value=0.5, step=0.5)
   Sc = 1.3 
   Sq= 1.0
   Sγ = 0.6
-elif shape = "Rectangular":
+elif shape == "Rectangular":
   B= st.sidebar.number_input("Enter the footing Width (m.):", min_value=0.5, step=0.5)
   L= st.sidebar.number_input("Enter the footing Length (m.):", min_value=0.5, step=0.5)
   Sc = 1.0 +0.3*(B/L) 
