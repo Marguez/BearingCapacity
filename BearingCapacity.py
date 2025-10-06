@@ -89,8 +89,8 @@ st.write(f"Sγ = {Sγ}")
 st.write(f"")
 q= γ_s * d_f
 st.write(f"q = {q:.2f} kPa")
-st.write(f"*Using the **Terzaghi Bearing Capacity Equation:** *")
-qu = c*Nc*Sc+ q*Nq+Sq+ 0.5*B*γ_s*Sγ
+st.write(f"Using the **Terzaghi Bearing Capacity Equation:**")
+qu = c*Nc*Sc+ q*Nq+Sq+ 0.5*B*γ_s*Nγ*Sγ
 qa = qu/FS
 st.write(f"The ultimate bearing capacity is **qu = {qu:.2f} kPa.**")
 st.write(f"The safe bearing capacity is **qa = {qa:.2f} kPa.**")
