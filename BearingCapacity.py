@@ -14,7 +14,7 @@ st.sidebar.header("Input parameters (SI units)")
 
 idx = st.sidebar.number_input("Enter the angle of internal friction (0–50):", min_value=0, max_value=50, step=1)
 shape = st.sidebar.selectbox("Select the footing with a given dimension:", options=["Strip", "Circular", "Square", "Rectangular"])
-st.sidebar.write(f"*Covering: {cc_mm + d_b_mm/2} mm.*")
+st.sidebar.write(f"*Covering:  mm.*")
 
 # Define arrays
 Φ = list(range(0, 51))
