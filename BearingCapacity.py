@@ -78,9 +78,9 @@ Nγ= Nγ[idx]
 
 st.subheader("Terzaghi Bearing Capacity Equation")
 st.write(f"*For Φ = {idx}, the bearing capacity factors are:*")
-st.write(f"Nc = {Nc[idx]}")
-st.write(f"Nq = {Nq[idx]}")
-st.write(f"Nγ = {Nγ[idx]}")
+st.write(f"Nc = {Nc}")
+st.write(f"Nq = {Nq}")
+st.write(f"Nγ = {Nγ}")
 st.write(f"")
 st.write(f"*For {shape}, the shape factors are:*")
 st.write(f"Sc = {Sc}")
