@@ -88,6 +88,7 @@ st.write(f"Sq = {Sq}")
 st.write(f"Sγ = {Sγ}")
 st.write(f"")
 q= γ_s * d_f
+st.write(f"q = {q:.2f} kPa")
 st.write(f"*Using the **Terzaghi Bearing Capacity Equation:** *")
 qu = c*Nc*Sc+ q*Nq+Sq+ 0.5*B*γ_s*Sγ
 qa = qu/FS
