@@ -94,15 +94,15 @@ if d_wt < d_f+B:
   st.write(f"*Considering the effect of the water table:*")
   if d_wt < d_f:  
     st.write(f"*Since the water table is above the footing:*")
-    γ = γ_sat -γ_s
+    γ = γ_sat -9.81
     q = γ_s* d_wt+ γ* (d_f-d_wt)
   elif d_wt == d_f:
-    γ = γ_sat -γ_s
+    γ = γ_sat -9.81
     q = γ_s* d_wt
   elif d_wt > d_f and d_wt < d_f+B:
     q = γ_s* d_f
     H = 0.5*B*math.tan(math.radians(45+idx/2))
-    γ = γ_s*(d_wt-d_f)/ (H**2)*(2*H-(d_wt-d_f))+(γ_sat -γ_s)/(H**2)*(H-(d_wt-d_f))**2
+    γ = γ_s*(d_wt-d_f)/ (H**2)*(2*H-(d_wt-d_f))+(γ_sat -9.81)/(H**2)*(H-(d_wt-d_f))**2
     st.write(f"H = {H:.2f} m.")
 else:
   q= γ_s * d_f
