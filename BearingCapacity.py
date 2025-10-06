@@ -12,8 +12,7 @@ st.title("Bearing Capacity")
 # ---------------------------
 st.sidebar.header("Input parameters (SI units)")
 
-st.sidebar.caption("For first column:")
-idx = st.sidebar.number_input("Enter an index (0–50):", min_value=0, max_value=50, step=1)
+idx = st.sidebar.number_input("Enter the angle of internal friction (0–50):", min_value=0, max_value=50, step=1)
 P_D1 = st.sidebar.number_input("Dead axial load P_D1 (kN)", value=200.0, step=10.0, format="%.2f")
 
 
@@ -22,9 +21,9 @@ cc_mm  = st.sidebar.number_input("Clear cover cc (mm)", min_value=5, value=50, s
 st.sidebar.write(f"*Covering: {cc_mm + d_b_mm/2} mm.*")
 
 # Define arrays
-A = list(range(0, 51))
+Φ = list(range(0, 51))
 
-B = [
+Nc = [
   5.70,  6.00,  6.30,  6.62,  6.97,  7.34,  7.73,  8.15,  8.60,  9.09,
   9.61, 10.16, 10.76, 11.41, 12.11, 12.86, 13.68, 14.60, 15.62, 16.56,
  17.69, 18.92, 20.27, 21.75, 23.36, 25.13, 27.09, 29.14, 31.61, 34.24,
@@ -33,7 +32,7 @@ B = [
 347.50
 ]
 
-C = [
+Nq = [
   1.00,  1.10,  1.22,  1.35,  1.49,  1.64,  1.81,  2.00,  2.21,  2.44,
   2.69,  2.98,  3.29,  3.63,  4.02,  4.45,  4.92,  5.45,  6.04,  6.70,
   7.44,  8.26,  9.19, 10.23, 11.40, 12.72, 14.21, 15.66, 17.81, 19.98,
@@ -42,7 +41,7 @@ C = [
 415.14
 ]
 
-D = [
+Nγ = [
   0.00, 0.01, 0.04, 0.06, 0.10, 0.14, 0.20, 0.27, 0.35, 0.44,
   0.56, 0.69, 0.85, 1.04, 1.26, 1.52, 1.82, 2.18, 2.59, 3.07,
   3.64, 4.31, 5.09, 6.00, 7.08, 8.34, 9.84,11.73,13.70,16.18,
@@ -54,7 +53,7 @@ D = [
 
 
 st.subheader("Corresponding Values")
-st.write(f"A = {A[idx]}")
-st.write(f"B = {B[idx]}")
-st.write(f"C = {C[idx]}")
-st.write(f"D = {D[idx]}")
+st.write(f"For Φ = {Φ[idx]}")
+st.write(f"Nc = {Nc[idx]}")
+st.write(f"Nq = {Nq[idx]}")
+st.write(f"Nγ = {Nγ[idx]}")
