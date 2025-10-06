@@ -13,11 +13,7 @@ st.title("Bearing Capacity")
 st.sidebar.header("Input parameters (SI units)")
 
 idx = st.sidebar.number_input("Enter the angle of internal friction (0–50):", min_value=0, max_value=50, step=1)
-P_D1 = st.sidebar.number_input("Dead axial load P_D1 (kN)", value=200.0, step=10.0, format="%.2f")
-
-
-d_b_mm = st.sidebar.number_input("Main bar diameter d_b (mm)", min_value=6, value=16, step=1, format="%d")
-cc_mm  = st.sidebar.number_input("Clear cover cc (mm)", min_value=5, value=50, step=1, format="%d")
+shape = st.sidebar.selectbox("Select the footing with a given dimension:", options=["Strip", "Circular", "Square", "Rectangular"])
 st.sidebar.write(f"*Covering: {cc_mm + d_b_mm/2} mm.*")
 
 # Define arrays
@@ -52,8 +48,8 @@ Nγ = [
 
 
 
-st.subheader("Corresponding Values")
-st.write(f"For Φ = {Φ[idx]}")
+st.subheader("Terzaghi Bearing Capacity Equation")
+st.write(f"*For Φ = {Φ[idx]}:*")
 st.write(f"Nc = {Nc[idx]}")
 st.write(f"Nq = {Nq[idx]}")
 st.write(f"Nγ = {Nγ[idx]}")
