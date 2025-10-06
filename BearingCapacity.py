@@ -41,7 +41,7 @@ FS= st.sidebar.number_input("Factor of Safety", value=2.0, step=0.5, format="%.1
 st.sidebar.write(f"*Covering:  mm.*")
 
 # Define arrays
-Φ = list(range(0, 51))
+idx = list(range(0, 51))
 
 Nc = [
   5.70,  6.00,  6.30,  6.62,  6.97,  7.34,  7.73,  8.15,  8.60,  9.09,
