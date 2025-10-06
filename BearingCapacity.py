@@ -41,8 +41,9 @@ FS= st.sidebar.number_input("Factor of Safety", value=2.0, step=0.5, format="%.1
 st.sidebar.write(f"*Covering:  mm.*")
 
 # Define arrays
-idx = list(range(0, 51))
+#idx = list(range(0, 51))
 
+idx = int(idx)
 Nc = [
   5.70,  6.00,  6.30,  6.62,  6.97,  7.34,  7.73,  8.15,  8.60,  9.09,
   9.61, 10.16, 10.76, 11.41, 12.11, 12.86, 13.68, 14.60, 15.62, 16.56,
@@ -76,7 +77,7 @@ Nγ= Nγ[idx]
 
 
 st.subheader("Terzaghi Bearing Capacity Equation")
-st.write(f"*For Φ = {Φ[idx]}, the bearing capacity factors are:*")
+st.write(f"*For Φ = {idx}, the bearing capacity factors are:*")
 st.write(f"Nc = {Nc[idx]}")
 st.write(f"Nq = {Nq[idx]}")
 st.write(f"Nγ = {Nγ[idx]}")
