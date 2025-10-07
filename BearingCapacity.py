@@ -145,8 +145,7 @@ st.write(f"")
 st.write(f"Using the **Terzaghi Bearing Capacity Equation:**")
 qu = c*Nc*Sc + q*Nq*Sq + 0.5*B*γ*Nγ*Sγ
 qa = qu/FS
-st.write(f"The ultimate bearing capacity is **qu = {qu:.2f} kPa.**")
-st.write(f"The safe bearing capacity is **qa = {qa:.2f} kPa.**")
+st.success(f"The ultimate bearing capacity is **qu = {qu:.2f} kPa.** The safe bearing capacity is **qa = {qa:.2f} kPa.**")
 
 if settlement:
   st.subheader("Foundation Settlement")
@@ -154,7 +153,7 @@ if settlement:
   pf = P / (B*L)
   st.write(f"Net pressure is **p = {pf:.2f} kPa.**")
   Hi= pf * B* (1-u**2)/(E)*I
-  st.write(f"The immediate settlement is **ΔHi = {Hi:.2f} mm.**")
+  st.warning(f"The immediate settlement is **ΔHi = {Hi:.2f} mm.**")
   st.write(f"")
   st.write(f"**PRIMARY CONSOLIDATED SETTLEMENT**")
   if d_wt<d_c:
@@ -189,7 +188,7 @@ if settlement:
     st.write(f"*For over consolidated soil (Pf>Pc):*")
     Hpc = H*1000/ (1 + eo) *(Cs* math.log10(Pc/Po) + Cc* math.log10(Pf/Pc))
 
-  st.write(f"The primary consolidated settlement is **ΔHpc = {Hpc:.2f} mm.**")
+  st.warning(f"The primary consolidated settlement is **ΔHpc = {Hpc:.2f} mm.**")
 
   st.write(f"")
   st.write(f"**SECONDARY CONSOLIDATED SETTLEMENT**")
@@ -203,5 +202,11 @@ if settlement:
   Hsc = 1000*H*Ca/(1+ef)*math.log10(t2/t1)
   st.write(f"The change in void ratio is **Δe = {Δe:.4f}.**")
   st.write(f"The final in void ratio is **ef = {ef:.4f}.**")
-  st.write(f"The secondary consolidated settlement is **ΔHsc = {Hsc:.2f} mm.**")
+  st.warning(f"The secondary consolidated settlement is **ΔHsc = {Hsc:.2f} mm.**")
+
+  st.write(f"")
+  st.write(f"**TOTAL SETTLEMENT**")
+  Ht= Hi + Hpc + Hsc
+  st.success(f"ΔH = {Hi:.2f} + {Hpc:.2f} + {Hsc:.2f} = **{Ht} mm.**")
+
 
