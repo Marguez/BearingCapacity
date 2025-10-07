@@ -133,9 +133,9 @@ if d_wt < d_f+B:
   elif d_wt > d_f and d_wt < d_f+B:
     st.write(f"*Since the water table is less than B = {B} meters below the footing:*")
     q = γ_s* d_f
-    H = 0.5*B*math.tan(math.radians(45+idx/2))
-    γ = γ_s*(d_wt-d_f)/ (H**2)*(2*H-(d_wt-d_f))+(γ_sat -9.81)/(H**2)*(H-(d_wt-d_f))**2
-    st.write(f"H = {H:.2f} m.")
+    H1 = 0.5*B*math.tan(math.radians(45+idx/2))
+    γ = γ_s*(d_wt-d_f)/ (H1**2)*(2*H1-(d_wt-d_f))+(γ_sat -9.81)/(H1**2)*(H-(d_wt-d_f))**2
+    st.write(f"H = {H1:.2f} m.")
 else:
   q= γ_s * d_f
   γ = γ_s
@@ -158,7 +158,6 @@ if settlement:
   st.write(f"**PRIMARY CONSOLIDATED SETTLEMENT**")
   if d_wt<=d_c:
     Po = γ_s*d_wt + (d_c-d_wt)*(γ_sat-9.81)+ (H/2)*(γ_c-9.81)
-    st.write(f"{γ_s*d_wt}, {(d_c-d_wt)*(γ_sat-9.81)}, {(H/2)*(γ_c-9.81)}")
   elif d_wt < d_c + H:
     Po = γ_s*d_c + (d_wt-d_c)*γ_cd + (d_c + H - d_wt) * γ_c
   else:
