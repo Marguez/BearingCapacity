@@ -53,11 +53,11 @@ if settlement:
   E = st.sidebar.number_input("Modulus of Elasticity E (MPa):", value=15.00, step=0.10, format="%.2f")
   I = st.sidebar.number_input("Influence Factor:", value=0.88, step=0.01, format="%.2f")
   H = st.sidebar.number_input("Thickness of stratum/clay H (m.):", value=1.0, step=0.1, format="%.2f")
+  d_c = st.sidebar.number_input("Depth at the top of the stratum/clay (m.):", value=1.0, step=0.1, format="%.2f")
   γ_c = st.sidebar.number_input("Unit weight of saturated clay γ_c (kN/m³)", value=18.0, step=1.0, format="%.2f")
   if d_c < d_wt:
     st.sidebar.caption("Clay layer is partly not saturated:") 
     γ_cd = st.sidebar.number_input("Unit weight of unsaturated clay (kN/m³)", value=18.0, step=1.0, format="%.2f")
-  d_c = st.sidebar.number_input("Depth at the top of the stratum/clay (m.):", value=1.0, step=0.1, format="%.2f")
   Cc = st.sidebar.number_input("Compression Index Cc *(set to zero if LL is given)*:", value=0.5, step=0.05, format="%.2f")
   if Cc==0:
     LL = st.sidebar.number_input("Liquid Limit (LL):", value=20.0, step=1.0, format="%.2f")
