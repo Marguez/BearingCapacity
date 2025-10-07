@@ -158,6 +158,7 @@ if settlement:
   st.write(f"**PRIMARY CONSOLIDATED SETTLEMENT**")
   if d_wt<=d_c:
     Po = γ_s*d_wt + (d_c-d_wt)*(γ_sat-9.81)+ (H/2)*(γ_c-9.81)
+    st.write(f"{γ_s*d_wt}, {(d_c-d_wt)*(γ_sat-9.81)}, {(H/2)*(γ_c-9.81)}")
   elif d_wt < d_c + H:
     Po = γ_s*d_c + (d_wt-d_c)*γ_cd + (d_c + H - d_wt) * γ_c
   else:
