@@ -156,7 +156,7 @@ if settlement:
   st.warning(f"The immediate settlement is **ΔHi = {Hi:.2f} mm.**")
   st.write(f"")
   st.write(f"**PRIMARY CONSOLIDATED SETTLEMENT**")
-  if d_wt<d_c:
+  if d_wt<=d_c:
     Po = γ_s*d_wt + (d_c-d_wt)*(γ_sat-9.81)+ (H/2)*(γ_c-9.81)
   elif d_wt < d_c + H:
     Po = γ_s*d_c + (d_wt-d_c)*γ_cd + (d_c + H - d_wt) * γ_c
