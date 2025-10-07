@@ -50,6 +50,7 @@ if settlement:
   u = st.sidebar.number_input("Poisson's Ratio u: ", value=0.05, step=0.01, format="%.2f")
   E = st.sidebar.number_input("Modulus of Elasticity E (MPa):", value=15.00, step=0.10, format="%.2f")
   I = st.sidebar.number_input("Influence Factor:", value=0.88, step=0.01, format="%.2f")
+  γ_c = st.sidebar.number_input("Unit weight of clay γ_c (kN/m³)", value=18.0, step=1.0, format="%.2f")
   H = st.sidebar.number_input("Thickness of stratum/clay H (m.):", value=1.0, step=0.1, format="%.2f")
   d_c = st.sidebar.number_input("Depth at the top of the stratum/clay (m.):", value=1.0, step=0.1, format="%.2f")
   Cc = st.sidebar.number_input("Compression Index Cc *(set to zero if LL is given)*:", value=0.5, step=0.05, format="%.2f")
@@ -144,7 +145,7 @@ if settlement:
   st.write(f"**IMMEDIATE SETTLEMENT**")
   pf = P / (B*L)
   st.write(f"Net pressure is **p = {pf:.2f} kPa.**")
-  Hi= pf * B* (1-u**2)/(1000*E)*I
+  Hi= pf * B* (1-u**2)/(E)*I
   st.write(f"The immediate settlement is ** ΔHi = {Hi:.2f} mm.**")
 
 
