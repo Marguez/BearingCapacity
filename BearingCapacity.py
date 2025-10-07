@@ -179,7 +179,7 @@ if settlement:
   st.write(f"")
   if cons:
     st.write(f"*For normally consolidated soil:*")
-    Hpc = H * Cc / (1 + eo) * math.log10(Pf/Po)
+    Hpc = H*1000 * Cc / (1 + eo) * math.log10(Pf/Po)
 
   st.write(f"The primary consolidated settlement is ** ΔHpc = {Hpc:.2f} mm.**")
   
