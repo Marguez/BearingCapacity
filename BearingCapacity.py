@@ -168,9 +168,9 @@ if settlement:
   zm = d_c + H/2 - d_f
   zb = d_c + H - d_f
   st.write(f"zt = {zt:.2f} m., zm = {zm:.2f} m., and zb = {zb:.2f} m.")
-  Pt= P/((B+zt)*(L+zt))
-  Pm= P/((B+zm)*(L+zm))
-  Pb= P/((B+zb)*(L+zb))
+  Pt= round(P/((B+zt)*(L+zt)),2)
+  Pm= round(P/((B+zm)*(L+zm)),2)
+  Pb= round(P/((B+zb)*(L+zb)),2)
   st.write(f"Pt = {Pt:.2f} kPa, Pm = {Pm:.2f} kPa, and Pb = {Pb:.2f} kPa")
   ΔP = (Pt + Pb + 4*Pm)/ 6
   Pf= Po + ΔP
