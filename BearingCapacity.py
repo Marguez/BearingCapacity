@@ -19,6 +19,7 @@ if shape == "Strip":
   Sc = Sq = Sγ = 1.0
 elif shape == "Square":
   B= st.sidebar.number_input("Enter the footing width (m.):", min_value=0.5, step=0.5)
+  L = B
   Sc = 1.3 
   Sq= 1.0
   Sγ = 0.8
@@ -40,7 +41,27 @@ c = st.sidebar.number_input("Enter cohesion (kPa):", min_value=0, step=10)
 d_f = st.sidebar.number_input("Foundation depth d_f (m)", min_value=0.0, value=0.00, step=0.1, format="%.2f")
 d_wt = st.sidebar.number_input("Depth of Water Table (m)", min_value=0.0, value=50.00, step=0.1, format="%.2f")
 FS= st.sidebar.number_input("Factor of Safety", value=2.0, step=0.5, format="%.1f")
-st.sidebar.write(f"*Covering:  mm.*")
+st.sidebar.write(f"")
+if shape == "Rectangular" or shape == "Square":
+  settlement = st.sidebar.toggle("Do you want to compute for the settlement?")
+
+if settlement:
+  P = st.sidebar.number_input("Total axial load P (kN):", value=200.0, step=10.0, format="%.2f")
+  u = st.sidebar.number_input("Poisson's Ratio u: ", value=0.05, step=0.01, format="%.2f")
+  E = st.sidebar.number_input("Modulus of Elasticity E (MPa):", value=15.00, step=0.10, format="%.2f")
+  I = st.sidebar.number_input("Influence Factor:", value=0.88, step=0.01, format="%.2f")
+  H = st.sidebar.number_input("Thickness of stratum/clay H (m.):", value=1.0, step=0.1, format="%.2f")
+  d_c = st.sidebar.number_input("Depth at the top of the stratum/clay (m.):", value=1.0, step=0.1, format="%.2f")
+  Cc = st.sidebar.number_input("Compression Index Cc *(set to zero if LL is given)*:", value=0.5, step=0.05, format="%.2f")
+  if Cc==0:
+    LL = st.sidebar.number_input("Liquid Limit (LL):", value=20.0, step=1.0, format="%.2f")
+    Cc= round(0.009*(LL-10),2)
+    st.sidebar.write(f"*Cc: {Cc:.2f}*")  
+  eo= st.sidebar.number_input("Initial void ratio eo:", value=1.0, step=0.1, format="%.2f")
+  cons = st.sidebar.toggle("Normally Consolidated?")
+  if not cons:
+    Cs = st.sidebar.number_input("Swell Index Cs:", value=0.5, step=0.05, format="%.2f")
+
 
 # Define arrays
 #idx = list(range(0, 51))
@@ -117,5 +138,13 @@ qu = c*Nc*Sc + q*Nq*Sq + 0.5*B*γ*Nγ*Sγ
 qa = qu/FS
 st.write(f"The ultimate bearing capacity is **qu = {qu:.2f} kPa.**")
 st.write(f"The safe bearing capacity is **qa = {qa:.2f} kPa.**")
+
+if settlement:
+  st.subheader("Foundation Settlement")
+  st.write(f"**IMMEDIATE SETTLEMENT**")
+  pf = P / (B*L)
+  st.write(f"Net pressure is **p = {pf:.2f} kPa.**")
+  Hi= pf * B* (1-u**2)/(1000*E)*I
+  st.write(f"The immediate settlement is ** ΔHi = {Hi:.2f} mm.**")
 
 
