@@ -12,6 +12,8 @@ st.title("Bearing Capacity")
 # ---------------------------
 st.sidebar.header("Input parameters (SI units)")
 
+settlement = False
+
 idx = st.sidebar.number_input("Enter the angle of internal friction (0–50):", min_value=0, max_value=50, step=1)
 shape = st.sidebar.selectbox("Select the footing with a given dimension:", options=["Strip", "Circular", "Square", "Rectangular"])
 if shape == "Strip":
