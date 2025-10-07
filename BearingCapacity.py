@@ -152,7 +152,7 @@ if settlement:
   pf = P / (B*L)
   st.write(f"Net pressure is **p = {pf:.2f} kPa.**")
   Hi= pf * B* (1-u**2)/(E)*I
-  st.write(f"The immediate settlement is ** ΔHi = {Hi:.2f} mm.**")
+  st.write(f"The immediate settlement is **ΔHi = {Hi:.2f} mm.**")
   st.write(f"")
   st.write(f"**PRIMARY CONSOLIDATED SETTLEMENT**")
   if d_wt<d_c:
