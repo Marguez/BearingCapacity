@@ -58,11 +58,11 @@ if settlement:
   if d_c < d_wt:
     st.sidebar.caption("Clay layer is partly not saturated:") 
     γ_cd = st.sidebar.number_input("Unit weight of unsaturated clay (kN/m³)", value=18.0, step=1.0, format="%.2f")
-  Cc = st.sidebar.number_input("Compression Index Cc *(set to zero if LL is given)*:", value=0.5, step=0.05, format="%.2f")
+  Cc = st.sidebar.number_input("Compression Index Cc *(set to zero if LL is given)*:", value=0.5, step=0.05, format="%.3f")
   if Cc==0:
     LL = st.sidebar.number_input("Liquid Limit (LL):", value=20.0, step=1.0, format="%.2f")
-    Cc= round(0.009*(LL-10),2)
-    st.sidebar.write(f"*Cc: {Cc:.2f}*")  
+    Cc= round(0.009*(LL-10),3)
+    st.sidebar.write(f"*Cc: {Cc:.3f}*")  
   eo= st.sidebar.number_input("Initial void ratio eo:", value=1.0, step=0.1, format="%.2f")
   cons = st.sidebar.toggle("Normally Consolidated?")
   if not cons:
@@ -162,7 +162,7 @@ if settlement:
   else:
     Po = γ_s*d_c + γ_cd * H
 
-  st.write(f"Initial vertical effective soil stress at the clay's mid-height **7.2Po = {Po:.2f} kPa.**")
+  st.write(f"Initial vertical effective soil stress at the clay's mid-height **Po = {Po:.2f} kPa.**")
   st.write(f"*Solving for ΔP*")
   zt = d_c - d_f
   zm = d_c + H/2 - d_f
