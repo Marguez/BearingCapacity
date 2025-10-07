@@ -50,8 +50,11 @@ if settlement:
   u = st.sidebar.number_input("Poisson's Ratio u: ", value=0.05, step=0.01, format="%.2f")
   E = st.sidebar.number_input("Modulus of Elasticity E (MPa):", value=15.00, step=0.10, format="%.2f")
   I = st.sidebar.number_input("Influence Factor:", value=0.88, step=0.01, format="%.2f")
-  γ_c = st.sidebar.number_input("Unit weight of clay γ_c (kN/m³)", value=18.0, step=1.0, format="%.2f")
   H = st.sidebar.number_input("Thickness of stratum/clay H (m.):", value=1.0, step=0.1, format="%.2f")
+  γ_c = st.sidebar.number_input("Unit weight of saturated clay γ_c (kN/m³)", value=18.0, step=1.0, format="%.2f")
+  if d_c < d_wt:
+    st.sidebar.caption("Clay layer is partly not saturated:") 
+    γ_cd = st.sidebar.number_input("Unit weight of unsaturated clay (kN/m³)", value=18.0, step=1.0, format="%.2f")
   d_c = st.sidebar.number_input("Depth at the top of the stratum/clay (m.):", value=1.0, step=0.1, format="%.2f")
   Cc = st.sidebar.number_input("Compression Index Cc *(set to zero if LL is given)*:", value=0.5, step=0.05, format="%.2f")
   if Cc==0:
@@ -62,6 +65,7 @@ if settlement:
   cons = st.sidebar.toggle("Normally Consolidated?")
   if not cons:
     Cs = st.sidebar.number_input("Swell Index Cs:", value=0.5, step=0.05, format="%.2f")
+    Pc= st.sidebar.number_input("Pre-consolidated Pressure Pc (kPa):", value=100.00, step=10.0, format="%.2f")
 
 
 # Define arrays
@@ -147,5 +151,35 @@ if settlement:
   st.write(f"Net pressure is **p = {pf:.2f} kPa.**")
   Hi= pf * B* (1-u**2)/(E)*I
   st.write(f"The immediate settlement is ** ΔHi = {Hi:.2f} mm.**")
+  st.write(f"")
+  st.write(f"**PRIMARY CONSOLIDATED SETTLEMENT**")
+  if d_wt<d_c:
+    Po = γ_s*d_wt + (d_c-d_wt)*(γ_sat-9.81)+ (H/2)*(γ_c-9.81)
+  elif d_wt < d_c + H:
+    Po = γ_s*d_c + (d_wt-d_c)*γ_cd + (d_c + H - d_wt) * γ_c
+  else:
+    Po = γ_s*d_c + γ_cd * H
 
+  st.write(f"Initial vertical effective soil stress at the clay's mid-height ** Po = {Po:.2f} kPa.**")
+  st.write(f"*Solving for ΔP*")
+  zt = d_c - d_f
+  zm = d_c + H/2 - d_f
+  zb = d_c + H - d_f
+  st.write(f"zt = {zt:.2f} m., zm = {zm:.2f} m., and zb = {zb:.2f} m.")
+  Pt= P/((B+zt)*(L+zt))
+  Pm= P/((B+zm)*(L+zm))
+  Pb= P/((B+zb)*(L+zb))
+  st.write(f"Pt = {Pt:.2f} kPa, Pm = {Pm:.2f} kPa, and Pb = {Pb:.2f} kPa")
+  ΔP = (Pt + Pb + 4*Pm)/ 6
+  Pf= Po + ΔP
+  st.write(f"The soil surcharge is ** ΔP = {ΔP:.2f} kPa.**")
+  st.write(f"Final vertical effective soil stress of the clay ** Pf = {Pf:.2f} kPa.**")
+  st.write(f"")
+  if cons:
+    st.write(f"*For normally consolidated soil:*")
+    Hpc = H * Cc / (1 + eo) * math.log10(Pf/Po)
+
+  st.write(f"The primary consolidated settlement is ** ΔHpc = {Hpc:.2f} mm.**")
+  
+  
 
