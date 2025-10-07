@@ -68,7 +68,9 @@ if settlement:
   if not cons:
     Cs = st.sidebar.number_input("Swell Index Cs:", value=0.5, step=0.05, format="%.2f")
     Pc= st.sidebar.number_input("Pre-consolidated Pressure Pc (kPa):", value=100.00, step=10.0, format="%.2f")
-
+  Ca= st.sidebar.number_input("Secondary Compression Index Ca:", value=0.5, step=0.05, format="%.2f")
+  t1= st.sidebar.number_input("Time of Completion of Primary Settlement t1:", value=1.0, step=1.0, format="%.2f")
+  t2= st.sidebar.number_input("Time after Completion of Primary Settlement t2:", value=1.0, step=1.0, format="%.2f")
 
 # Define arrays
 #idx = list(range(0, 51))
@@ -174,14 +176,32 @@ if settlement:
   st.write(f"Pt = {Pt:.2f} kPa, Pm = {Pm:.2f} kPa, and Pb = {Pb:.2f} kPa")
   ΔP = (Pt + Pb + 4*Pm)/ 6
   Pf= Po + ΔP
-  st.write(f"The soil surcharge is ** ΔP = {ΔP:.2f} kPa.**")
-  st.write(f"Final vertical effective soil stress of the clay ** Pf = {Pf:.2f} kPa.**")
+  st.write(f"The soil surcharge is **ΔP = {ΔP:.2f} kPa.**")
+  st.write(f"Final vertical effective soil stress of the clay **Pf = {Pf:.2f} kPa.**")
   st.write(f"")
   if cons:
     st.write(f"*For normally consolidated soil:*")
     Hpc = H*1000 * Cc / (1 + eo) * math.log10(Pf/Po)
+  if not cons and Pf < Pc:
+    st.write(f"*For over consolidated soil (Pf<Pc):*")
+    Hpc = H*1000 * Cs / (1 + eo) * math.log10(Pf/Po)
+  if not cons and Pf > Pc:
+    st.write(f"*For over consolidated soil (Pf>Pc):*")
+    Hpc = H*1000/ (1 + eo) *(Cs* math.log10(Pc/Po) + Cc* math.log10(Pf/Pc))
 
-  st.write(f"The primary consolidated settlement is ** ΔHpc = {Hpc:.2f} mm.**")
-  
-  
+  st.write(f"The primary consolidated settlement is **ΔHpc = {Hpc:.2f} mm.**")
+
+  st.write(f"")
+  st.write(f"**SECONDARY CONSOLIDATED SETTLEMENT**")
+  if cons:
+    Δe = Cc * math.log10(Pf/Po)
+  if not cons and Pf < Pc:
+    Δe = Cs * math.log10(Pf/Po)
+  if not cons and Pf > Pc:
+    Δe = Cs* math.log10(Pc/Po) + Cc* math.log10(Pf/Pc)
+  ef= round(eo - Δe, 4)
+  Hsc = 1000*H*Ca/(1+ef)*math.log10(t2/t1)
+  st.write(f"The change in void ratio is **Δe = {Δe:.4f}.**")
+  st.write(f"The final in void ratio is **ef = {ef:.4f}.**")
+  st.write(f"The secondary consolidated settlement is **ΔHsc = {Hsc:.2f} mm.**")
 
