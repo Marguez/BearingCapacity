@@ -162,7 +162,7 @@ if settlement:
   else:
     Po = γ_s*d_c + γ_cd * H
 
-  st.write(f"Initial vertical effective soil stress at the clay's mid-height ** Po = {Po:.2f} kPa.**")
+  st.write(f"Initial vertical effective soil stress at the clay's mid-height **7.2Po = {Po:.2f} kPa.**")
   st.write(f"*Solving for ΔP*")
   zt = d_c - d_f
   zm = d_c + H/2 - d_f
