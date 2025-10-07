@@ -207,6 +207,6 @@ if settlement:
   st.write(f"")
   st.write(f"**TOTAL SETTLEMENT**")
   Ht= Hi + Hpc + Hsc
-  st.success(f"ΔH = {Hi:.2f} + {Hpc:.2f} + {Hsc:.2f} = **{Ht} mm.**")
+  st.success(f"ΔH = {Hi:.2f} + {Hpc:.2f} + {Hsc:.2f} = **{Ht:.2f} mm.**")
 
 
