@@ -134,7 +134,7 @@ if d_wt < d_f+B:
     st.write(f"*Since the water table is less than B = {B} meters below the footing:*")
     q = γ_s* d_f
     H1 = 0.5*B*math.tan(math.radians(45+idx/2))
-    γ = γ_s*(d_wt-d_f)/ (H1**2)*(2*H1-(d_wt-d_f))+(γ_sat -9.81)/(H1**2)*(H-(d_wt-d_f))**2
+    γ = γ_s*(d_wt-d_f)/ (H1**2)*(2*H1-(d_wt-d_f))+(γ_sat -9.81)/(H1**2)*(H1-(d_wt-d_f))**2
     st.write(f"H = {H1:.2f} m.")
 else:
   q= γ_s * d_f
