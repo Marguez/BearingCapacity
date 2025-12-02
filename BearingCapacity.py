@@ -145,7 +145,7 @@ st.write(f"")
 st.write(f"Using the **Terzaghi Bearing Capacity Equation:**")
 qu = c*Nc*Sc + q*Nq*Sq + 0.5*B*γ*Nγ*Sγ
 qa = qu/FS
-st.success(f"The ultimate bearing capacity is **qu = {qu:.2f} kPa.** The safe bearing capacity is **qa = {qa:.2f} kPa.**")
+st.success(f"The ultimate bearing capacity is qu = {c*Nc*Sc:.2f} + { q*Nq*Sq:.2f} + {0.5*B*γ*Nγ*Sγ:.2f} = **{qu:.2f} kPa.** The safe bearing capacity is **qa = {qa:.2f} kPa.**")
 
 if settlement:
   st.subheader("Foundation Settlement")
